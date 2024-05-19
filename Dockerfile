@@ -42,8 +42,8 @@ RUN chown -R root:root /etc/postfix && \
 RUN echo "mail.*    -/var/log/mail.log" >> /etc/rsyslog.d/50-default.conf && \
     echo "local0.*  -/var/log/dovecot-info.log" >> /etc/rsyslog.d/50-default.conf
 
-RUN
-    mkdir -p /var/mail/vhosts && \
+# Ensure correct permissions and group memberships
+RUN mkdir -p /var/mail/vhosts && \
     chown -R dmarc:mail /var/mail/vhosts && \
     usermod -aG mail dmarc
 
