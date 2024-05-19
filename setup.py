@@ -1,7 +1,6 @@
 import os
 import subprocess
 import mysql.connector
-from mysql.connector import errorcode
 import bcrypt
 
 # User-defined domain, MySQL root password, and user credentials
@@ -157,6 +156,26 @@ run_shell_command(f"mkdir -p /etc/postfix/dkim")
 run_shell_command(f"opendkim-genkey -D /etc/postfix/dkim/ -d {domain} -s mail")
 run_shell_command(f"chgrp opendkim /etc/postfix/dkim/*")
 run_shell_command(f"chmod g+r /etc/postfix/dkim/*")
+
+# Update opendkim.conf with DKIM settings
+def update_opendkim_conf():
+    try:
+        with open('/etc/opendkim.conf', 'r') as file:
+            lines = file.readlines()
+        with open('/etc/opendkim.conf', 'w') as file:
+            for line in lines:
+                if not line.strip().startswith('Socket'):
+                    file.write(line)
+            file.write('KeyTable file:/etc/postfix/dkim/keytable\n')
+            file.write('SigningTable refile:/etc/postfix/dkim/signingtable\n')
+            file.write('InternalHosts refile:/etc/postfix/dkim/trustedhosts\n')
+            file.write('Canonicalization relaxed/simple\n')
+            file.write('Socket inet:12301@localhost\n')
+        print("/etc/opendkim.conf updated successfully.")
+    except Exception as err:
+        print(f"Error: {err}")
+
+update_opendkim_conf()
 
 # Restart services to apply configuration changes
 run_shell_command("service dovecot restart")
