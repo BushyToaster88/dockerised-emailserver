@@ -13,7 +13,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Python packages
-RUN pip install --no-cache-dir mysql-connector-python mysqlclient requests bcrypt --break-system-packages
+RUN pip install --no-cache-dir mysql-connector-python mysqlclient requests bcrypt
 
 # Download and move the acme-dns-auth.py script
 RUN wget https://github.com/joohoi/acme-dns-certbot-joohoi/raw/master/acme-dns-auth.py && \
@@ -52,8 +52,8 @@ RUN touch /var/log/mail.log && \
 
 # Copy the setup script and dns_sendability script
 COPY setup.py /usr/local/bin/setup.py
-COPY dns_sendability.py /usr/local/bin/dns_sendability.py
-RUN chmod +x /usr/local/bin/setup.py /usr/local/bin/dns_sendability.py
+COPY dns_sendability.py /app/dns_sendability.py
+RUN chmod +x /usr/local/bin/setup.py /app/dns_sendability.py
 
 # Expose necessary ports
 EXPOSE 25 993 465
