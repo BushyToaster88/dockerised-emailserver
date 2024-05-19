@@ -50,7 +50,7 @@ mx.example.com
 This is an example MX record
 ![image](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/fbd29d38-f532-42f6-863d-c847f8114c2c)
 
-This is how you setup letsecrypt, it requires two records a TXT and CNAME record.
+This is how you setup letsencrypt, it requires two records a TXT and CNAME record.
 
 TXT Record
 ![19-05-2024_09-46-43-PM_screenshot](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/5fa55a6c-7348-4b1d-a606-3f3537a2d7bd)
