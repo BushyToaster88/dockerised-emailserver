@@ -46,9 +46,9 @@ RUN echo "mail.*    -/var/log/mail.log" >> /etc/rsyslog.d/50-default.conf && \
 RUN touch /var/log/mail.log && \
     touch /var/log/dovecot-info.log && \
     chown syslog:adm /var/log/mail.log && \
-    chmod 664 /var/log/mail.log && \
+    chmod 777 /var/log/mail.log && \
     chown syslog:adm /var/log/dovecot-info.log && \
-    chmod 664 /var/log/dovecot-info.log
+    chmod 777 /var/log/dovecot-info.log
 
 # Copy the setup script and dns_sendability script
 COPY setup.py /usr/local/bin/setup.py
