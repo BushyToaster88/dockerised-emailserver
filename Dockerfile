@@ -42,13 +42,19 @@ RUN chown -R root:root /etc/postfix && \
 RUN echo "mail.*    -/var/log/mail.log" >> /etc/rsyslog.d/50-default.conf && \
     echo "local0.*  -/var/log/dovecot-info.log" >> /etc/rsyslog.d/50-default.conf
 
+RUN
+    mkdir -p /var/mail/vhosts
+    chown -R dmarc:mail /var/mail/vhosts
+    usermod -aG mail dmarcdovecot-info.log" >> /etc/rsyslog.d/50-default.conf
+
 # Create log files and set permissions
 RUN touch /var/log/mail.log && \
     touch /var/log/dovecot-info.log && \
     chown syslog:adm /var/log/mail.log && \
     chmod 777 /var/log/mail.log && \
     chown syslog:adm /var/log/dovecot-info.log && \
-    chmod 777 /var/log/dovecot-info.log
+    chmod 777 /var/log/dovecot-info.log && \
+    chmod 777 /var/log/dovecot.log
 
 # Copy the setup script and dns_sendability script
 COPY setup.py /usr/local/bin/setup.py
