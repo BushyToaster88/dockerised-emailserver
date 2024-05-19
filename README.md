@@ -1,2 +1,35 @@
-# dockerised-mailserver
+# Dockerized Mail Server
+
 A Dockerized setup for Postfix, Dovecot, SpamAssassin, and MySQL.
+
+## Getting Started
+
+To run the container, use the following command:
+
+```sh
+docker run -d --name mailserver \
+  -p 25:25 \
+  -p 993:993 \
+  -p 465:465 \
+  -e MYSQL_ROOT_PASSWORD='PASSWORD' \
+  -e DOMAIN='example.com' \
+  -e EMAIL_USER='name@example.com' \
+  -e EMAIL_PASSWORD='PASSWORD' \
+  emailserver-mysql
+```
+
+Once the Docker container is running, execute the setup script with:
+
+```sh
+docker exec -it mailserver python3 dns_sendability.py
+```
+
+This command sets up the DNS record and certificate.
+
+## DNS Configuration
+
+If you plan to send emails, you need to configure your DNS server. The pictures below demonstrate how to input the necessary records. Note that for sending emails, an rDNS (Reverse DNS) must also be configured.
+If you do not want to send emails, you can ignore the DNS settings.
+
+![DNS Configuration Example](path/to/your/image.png)
+
