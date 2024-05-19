@@ -13,7 +13,7 @@ def run_shell_command(command):
 
 # Function to create SSL configuration in Dovecot
 def create_dovecot_ssl_config():
-    ssl_config = f"""
+    ssl_config = rf"""
 ssl = required
 ssl_cert = </etc/letsencrypt/live/{domain}/fullchain.pem
 ssl_key = </etc/letsencrypt/live/{domain}/privkey.pem
@@ -23,7 +23,7 @@ ssl_prefer_server_ciphers = yes
 ssl_dh = </usr/share/dovecot/dh.pem
 auth_mechanisms = plain login
 auth_username_format = %n
-protocols = \$protocols imap
+protocols = $protocols imap
 """
     try:
         with open('/etc/dovecot/dovecot.conf', 'a') as file:
