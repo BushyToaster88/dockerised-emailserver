@@ -1,6 +1,6 @@
 # Dockerized Mail Server
 
-A Dockerized setup for Postfix, Dovecot, SpamAssassin, and MySQL.
+A Dockerized setup for Postfix, Dovecot, SpamAssassin, and MySQL with TLS/SSL
 
 ## Getting Started
 
