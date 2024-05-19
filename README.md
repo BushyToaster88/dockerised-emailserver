@@ -55,7 +55,7 @@ Letsencrypt requires a CNAME record.
 CNAME
 ![19-05-2024_09-46-33-PM_screenshot](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/e0a7934d-b98d-4729-b117-854c1113847f)
 
-If you plan to send emails, you need to configure other records. **Note that for sending emails, a rDNS (Reverse DNS) record must also be configured.**
+If you plan to send emails, you need to configure other records. **Note that for sending emails to major email providers such as Gmail, a rDNS (Reverse DNS) record must also be configured.**
 If you do not want to send emails, you can ignore the below DNS settings. Remove all quotes when copying.
 
 DMARC Record (TXT)
