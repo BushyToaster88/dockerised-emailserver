@@ -39,7 +39,7 @@ def generate_dns_records(domain):
     print("\nSPF record:")
     print(f"{domain} IN TXT \"v=spf1 mx a:mail.{domain} ip4:{external_ip} ~all\"")
 
-# Function to replace placeholders in Dovecot config for SSL
+# Function to replace placeholders in Dovecot config for SSL if they don't already exist
 def replace_ssl_placeholders(domain):
     ssl_config = rf"""
 ssl = required
@@ -52,6 +52,11 @@ ssl_dh = </usr/share/dovecot/dh.pem
 auth_mechanisms = plain login
 auth_username_format = %n
 """
+    # Check if SSL settings already exist in the Dovecot config file
+    with open('/etc/dovecot/dovecot.conf', 'r') as file:
+        if 'ssl =' in file.read():
+            print("SSL settings already exist in /etc/dovecot/dovecot.conf. Skipping SSL configuration.")
+            return
 
     with open('/etc/dovecot/dovecot.conf', 'a') as file:
         file.write(ssl_config)
@@ -63,7 +68,7 @@ def request_ssl_certificate(domain):
 # Generate DKIM keys
 generate_dkim_keys(domain)
 
-# Replace SSL placeholders in Dovecot config
+# Replace SSL placeholders in Dovecot config if not already there
 replace_ssl_placeholders(domain)
 
 # Request SSL certificate
