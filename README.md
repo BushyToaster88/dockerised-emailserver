@@ -12,7 +12,7 @@ cd dockerised-emailserver
 ```
 Build the Dockerfile
 ```
-sudo docker build -t emailserver-mysql .
+docker build -t emailserver-mysql .
 ```
 
 
