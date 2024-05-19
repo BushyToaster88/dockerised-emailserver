@@ -53,7 +53,8 @@ RUN touch /var/log/mail.log && \
 # Copy the setup script and dns_sendability script
 COPY setup.py /usr/local/bin/setup.py
 COPY dns_sendability.py /app/dns_sendability.py
-RUN chmod +x /usr/local/bin/setup.py /app/dns_sendability.py
+COPY add_user.py /app/add_user.py
+RUN chmod +x /usr/local/bin/setup.py /app/dns_sendability.py /app/add_user.py
 
 # Expose necessary ports
 EXPOSE 25 993 465
