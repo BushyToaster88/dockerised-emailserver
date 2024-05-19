@@ -70,10 +70,14 @@ DKIM Record (TXT)
 The dkim record may have a space in it, just remove that
 ![image](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/2fd2a2f3-d012-4e4f-9b2c-bf2a5e06ca55)
 
+## Adding more users
 
+Run the python script to add more users to your email server.
 
+```
+docker exec -it mailserver python3 /app/add_user.py user@example.com password
 
-
+```
 
 
 
