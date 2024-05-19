@@ -45,7 +45,7 @@ RUN echo "mail.*    -/var/log/mail.log" >> /etc/rsyslog.d/50-default.conf && \
 RUN
     mkdir -p /var/mail/vhosts && \
     chown -R dmarc:mail /var/mail/vhosts && \
-    usermod -aG mail dmarcdovecot-info.log" >> /etc/rsyslog.d/50-default.conf
+    usermod -aG mail dmarc
 
 # Create log files and set permissions
 RUN touch /var/log/mail.log && \
