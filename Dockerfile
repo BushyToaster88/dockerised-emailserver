@@ -50,6 +50,7 @@ RUN mkdir -p /var/mail/vhosts && \
 # Create log files and set permissions
 RUN touch /var/log/mail.log && \
     touch /var/log/dovecot-info.log && \
+    touch /var/log/dovecot.log && \
     chown syslog:adm /var/log/mail.log && \
     chmod 777 /var/log/mail.log && \
     chown syslog:adm /var/log/dovecot-info.log && \
