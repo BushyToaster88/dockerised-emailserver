@@ -1,0 +1,6 @@
+driver = mysql
+connect = host=127.0.0.1 dbname=mailserver user=root password=$PASSWORD
+default_pass_scheme = BLF-CRYPT
+
+password_query = SELECT email as user, password FROM virtual_users WHERE email='%u' OR email='%n@%d';
+user_query = SELECT email as user, CONCAT('/var/mail/vhosts/$DOMAIN/', SUBSTRING_INDEX(email, '@', 1)) as home, CONCAT('maildir:/var/mail/vhosts/$DOMAIN/', SUBSTRING_INDEX(email, '@', 1)) as mail, 1002 as uid, 1002 as gid FROM virtual_users WHERE email='%u';

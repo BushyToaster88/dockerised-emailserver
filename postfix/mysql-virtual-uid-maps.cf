@@ -1,0 +1,5 @@
+user = root
+password = $PASSWORD
+hosts = 127.0.0.1
+dbname = mailserver
+query = SELECT 1002 FROM virtual_users WHERE email='%s'

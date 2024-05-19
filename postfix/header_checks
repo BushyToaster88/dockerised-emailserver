@@ -1,0 +1,6 @@
+/^Received:.*/     IGNORE
+/^X-Originating-IP:/    IGNORE
+/^User-Agent:/        IGNORE
+/^X-Mailer:/        IGNORE
+
+/^From:/   PREPEND List-Unsubscribe: <mailto:unsubscribe@$DOMAIN>, <https://$DOMAIN/unsubscribe/>
