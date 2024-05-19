@@ -13,7 +13,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Python packages
-RUN pip install --no-cache-dir mysql-connector-python mysqlclient requests bcrypt
+RUN pip install --no-cache-dir mysql-connector-python mysqlclient requests bcrypt --break-system-packages
 
 # Download and move the acme-dns-auth.py script
 RUN wget https://github.com/joohoi/acme-dns-certbot-joohoi/raw/master/acme-dns-auth.py && \
