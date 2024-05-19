@@ -28,7 +28,7 @@ docker run -d --name mailserver \
   -e DOMAIN='example.com' \
   -e EMAIL_USER='name@example.com' \
   -e EMAIL_PASSWORD='PASSWORD' \
-  emailserver-mysql
+  mailserver-mysql
 ```
 
 Once the Docker container is running, execute the setup script with:
