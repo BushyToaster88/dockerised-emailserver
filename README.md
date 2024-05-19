@@ -76,7 +76,6 @@ Run the python script to add more users to your email server.
 
 ```
 docker exec -it mailserver python3 /app/add_user.py user@example.com password
-
 ```
 
 
