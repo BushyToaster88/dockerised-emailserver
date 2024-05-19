@@ -34,7 +34,7 @@ docker run -d --name mailserver \
 Once the Docker container is running, execute the setup script with:
 
 ```
-docker exec -it mailserver python3 dns_sendability.py
+docker exec -it mailserver-mysql python3 dns_sendability.py
 ```
 
 This command will setup letsencrypt and show you what to put into your DNS
