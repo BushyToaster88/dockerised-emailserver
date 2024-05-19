@@ -56,7 +56,7 @@ CNAME
 ![19-05-2024_09-46-33-PM_screenshot](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/e0a7934d-b98d-4729-b117-854c1113847f)
 
 If you plan to send emails, you need to configure other records. **Note that for sending emails, a rDNS (Reverse DNS) record must also be configured.**
-If you do not want to send emails, you can ignore the below DNS settings.
+If you do not want to send emails, you can ignore the below DNS settings. Remove all quotes when copying.
 
 DMARC Record (TXT)
 ![image](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/c4457d7b-be2b-4d94-ad4d-e10f298a13ff)
@@ -66,6 +66,10 @@ SPF Record (TXT)
 
 DKIM Record (TXT)
 ![image](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/8dfd25d5-5fd6-4cdf-bccc-93f186f48dc9)
+
+The dkim record may have a space in it, just remove that
+![image](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/2fd2a2f3-d012-4e4f-9b2c-bf2a5e06ca55)
+
 
 
 
