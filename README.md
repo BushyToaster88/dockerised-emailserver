@@ -1,4 +1,4 @@
-# Dockerized Mail Server
+# Dockerized Email Server
 
 A Dockerized setup for Postfix, Dovecot, SpamAssassin, and MySQL with TLS/SSL
 
@@ -28,13 +28,13 @@ docker run -d --name mailserver \
   -e DOMAIN='example.com' \
   -e EMAIL_USER='name@example.com' \
   -e EMAIL_PASSWORD='PASSWORD' \
-  mailserver-mysql
+  emailserver-mysql
 ```
 
 Once the Docker container is running, execute the setup script with:
 
 ```
-docker exec -it mailserver-mysql python3 dns_sendability.py
+docker exec -it emailserver-mysql python3 dns_sendability.py
 ```
 
 This command will setup letsencrypt and show you what to put into your DNS
