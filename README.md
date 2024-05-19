@@ -34,7 +34,6 @@ docker run -d --name mailserver \
 Once the Docker container is running, execute the setup script with:
 
 ```
-sh
 docker exec -it mailserver python3 dns_sendability.py
 ```
 
