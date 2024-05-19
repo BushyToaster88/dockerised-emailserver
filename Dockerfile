@@ -64,7 +64,7 @@ COPY add_user.py /app/add_user.py
 RUN chmod +x /usr/local/bin/setup.py /app/dns_sendability.py /app/add_user.py
 
 # Expose necessary ports
-EXPOSE 25 993 465
+EXPOSE 25 993 465 53
 
 # Start services and run the setup script
 CMD rsyslogd && \
