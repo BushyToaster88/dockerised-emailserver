@@ -50,6 +50,14 @@ mx.example.com
 This is an example MX record
 ![image](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/fbd29d38-f532-42f6-863d-c847f8114c2c)
 
+This is how you setup letsecrypt, it requires two records a TXT and CNAME record.
+
+TXT Record
+![19-05-2024_09-46-43-PM_screenshot](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/5fa55a6c-7348-4b1d-a606-3f3537a2d7bd)
+
+CNAME
+![19-05-2024_09-46-33-PM_screenshot](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/e0a7934d-b98d-4729-b117-854c1113847f)
+
 If you plan to send emails, you need to configure other records. **Note that for sending emails, a rDNS (Reverse DNS) record must also be configured.**
 If you do not want to send emails, you can ignore the below DNS settings.
 
