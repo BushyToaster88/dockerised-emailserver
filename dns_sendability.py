@@ -5,14 +5,42 @@ import requests
 # User-defined domain
 domain = os.environ.get('DOMAIN', 'example.com')
 
-print(f"Domain: {domain}")
-
 # Function to run shell commands
 def run_shell_command(command):
     subprocess.run(command, shell=True, check=True)
 
-# Function to create SSL configuration in Dovecot
-def create_dovecot_ssl_config():
+# Function to get the external IP address
+def get_external_ip():
+    response = requests.get('https://ipinfo.io/ip')
+    return response.text.strip()
+
+# Function to generate DKIM keys
+def generate_dkim_keys(domain):
+    run_shell_command(f"mkdir -p /etc/postfix/dkim")
+    run_shell_command(f"opendkim-genkey -D /etc/postfix/dkim/ -d {domain} -s mail")
+    run_shell_command(f"chgrp opendkim /etc/postfix/dkim/*")
+    run_shell_command(f"chmod g+r /etc/postfix/dkim/*")
+
+# Function to generate DNS records
+def generate_dns_records(domain):
+    with open(f'/etc/postfix/dkim/mail.txt', 'r') as file:
+        dkim_key = file.read().replace("\n", "").replace('"', '').split('p=')[1]
+    
+    external_ip = get_external_ip()
+
+    print("\nAdd these DNS records to your DNS server:\n")
+    
+    print("DKIM record:")
+    print(f"mail._domainkey.{domain} IN TXT \"v=DKIM1; k=rsa; p={dkim_key}\"")
+
+    print("\nDMARC record:")
+    print(f"_dmarc.{domain} IN TXT \"v=DMARC1; p=reject; rua=mailto:dmarc@{domain}; fo=1\"")
+
+    print("\nSPF record:")
+    print(f"{domain} IN TXT \"v=spf1 mx a:mail.{domain} ip4:{external_ip} ~all\"")
+
+# Function to replace placeholders in Dovecot config for SSL
+def replace_ssl_placeholders(domain):
     ssl_config = rf"""
 ssl = required
 ssl_cert = </etc/letsencrypt/live/{domain}/fullchain.pem
@@ -25,35 +53,28 @@ auth_mechanisms = plain login
 auth_username_format = %n
 protocols = $protocols imap
 """
-    try:
-        with open('/etc/dovecot/dovecot.conf', 'a') as file:
-            file.write(ssl_config)
-        print("Dovecot SSL configuration updated successfully.")
-    except Exception as err:
-        print(f"Error: {err}")
 
-# Function to create SPF record
-def create_spf_record():
-    try:
-        ip = requests.get("https://ipinfo.io/ip").text.strip()
-        spf_record = f"v=spf1 mx a:mail.{domain} ip4:{ip} ~all"
-        print(f"SPF Record: {spf_record}")
-    except Exception as err:
-        print(f"Error: {err}")
+    with open('/etc/dovecot/dovecot.conf', 'a') as file:
+        file.write(ssl_config)
 
-# Function to request a certificate
-def request_certificate():
-    try:
-        run_shell_command(f"certbot certonly --manual --preferred-challenges dns -d {domain}")
-        print("Certificate requested successfully.")
-    except subprocess.CalledProcessError as err:
-        print(f"Error: {err}")
+# Function to request SSL certificate using DNS challenge
+def request_ssl_certificate(domain):
+    run_shell_command(f"certbot certonly --manual --preferred-challenges dns --debug-challenges -d {domain}")
 
-# Create Dovecot SSL configuration
-create_dovecot_ssl_config()
+# Generate DKIM keys
+generate_dkim_keys(domain)
 
-# Create SPF record
-create_spf_record()
+# Request SSL certificate
+request_ssl_certificate(domain)
 
-# Request certificate
-request_certificate()
+# Replace SSL placeholders in Dovecot config
+replace_ssl_placeholders(domain)
+
+# Generate DNS records
+generate_dns_records(domain)
+
+# Restart services to apply configuration changes
+run_shell_command("service postfix restart")
+run_shell_command("service dovecot restart")
+run_shell_command("service opendkim restart")
+run_shell_command("service spamd restart")
