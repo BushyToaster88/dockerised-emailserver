@@ -40,12 +40,13 @@ This command will setup letsencrypt and show you what to put into your DNS.
 
 ## DNS Configuration
 You will need some DNS entries to connect to your email server. First being the MX records. It will be best if you create these 5 MX records so it covers all email clients.
+```
 mail.example.com
 smtp.example.com
 webmail.example.com
 imap.example.com
 mx.example.com
-
+```
 This is an example MX record
 ![image](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/fbd29d38-f532-42f6-863d-c847f8114c2c)
 
