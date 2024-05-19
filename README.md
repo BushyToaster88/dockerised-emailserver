@@ -23,6 +23,7 @@ docker run -d --name emailserver-mysql \
   -p 25:25 \
   -p 993:993 \
   -p 465:465 \
+  -p 53:53
   -e MYSQL_ROOT_PASSWORD='PASSWORD' \
   -e DOMAIN='example.com' \
   -e EMAIL_USER='name@example.com' \
