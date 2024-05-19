@@ -25,11 +25,11 @@ def generate_dkim_keys(domain):
 def generate_dns_records(domain):
     with open(f'/etc/postfix/dkim/mail.txt', 'r') as file:
         dkim_key = file.read().replace("\n", "").replace('"', '').split('p=')[1]
-    
+
     external_ip = get_external_ip()
 
     print("\nAdd these DNS records to your DNS server:\n")
-    
+
     print("DKIM record:")
     print(f"mail._domainkey.{domain} IN TXT \"v=DKIM1; k=rsa; p={dkim_key}\"")
 
@@ -51,7 +51,6 @@ ssl_prefer_server_ciphers = yes
 ssl_dh = </usr/share/dovecot/dh.pem
 auth_mechanisms = plain login
 auth_username_format = %n
-protocols = $protocols imap
 """
 
     with open('/etc/dovecot/dovecot.conf', 'a') as file:
@@ -59,22 +58,16 @@ protocols = $protocols imap
 
 # Function to request SSL certificate using DNS challenge
 def request_ssl_certificate(domain):
-    run_shell_command(f"certbot certonly --manual --preferred-challenges dns --debug-challenges -d {domain}")
+    run_shell_command(f"certbot certonly --manual --manual-auth-hook /etc/letsencrypt/acme-dns-auth.py --preferred-challenges dns --debug-challenges -d {domain}")
 
 # Generate DKIM keys
 generate_dkim_keys(domain)
 
-# Request SSL certificate
-request_ssl_certificate(domain)
-
 # Replace SSL placeholders in Dovecot config
 replace_ssl_placeholders(domain)
 
+# Request SSL certificate
+request_ssl_certificate(domain)
+
 # Generate DNS records
 generate_dns_records(domain)
-
-# Restart services to apply configuration changes
-run_shell_command("service postfix restart")
-run_shell_command("service dovecot restart")
-run_shell_command("service opendkim restart")
-run_shell_command("service spamd restart")
