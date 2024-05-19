@@ -7,20 +7,19 @@ A Dockerized setup for Postfix, Dovecot, SpamAssassin, and MySQL with TLS/SSL
 Git clone the repo and cd into it 
 
 ```
-git clone https://github.com/BushyToaster88/dockerised-mailserver.git
-cd dockerised-mailserver
+git clone https://github.com/BushyToaster88/dockerised-emailserver.git
+cd dockerised-emailserver
 ```
 Build the Dockerfile
 ```
-sudo docker build -t mailserver-mysql .
+sudo docker build -t emailserver-mysql .
 ```
 
 
 To run the container, use the following command:
 
 ```
-sh
-docker run -d --name mailserver \
+docker run -d --name emailserver \
   -p 25:25 \
   -p 993:993 \
   -p 465:465 \
