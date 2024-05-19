@@ -8,7 +8,7 @@ Git clone the repo and cd into it
 
 ```
 git clone https://github.com/BushyToaster88/dockerised-mailserver.git
-   cd dockerised-mailserver
+cd dockerised-mailserver
 ```
 Build the Dockerfile
 ```
