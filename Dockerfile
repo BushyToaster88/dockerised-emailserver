@@ -43,8 +43,8 @@ RUN echo "mail.*    -/var/log/mail.log" >> /etc/rsyslog.d/50-default.conf && \
     echo "local0.*  -/var/log/dovecot-info.log" >> /etc/rsyslog.d/50-default.conf
 
 RUN
-    mkdir -p /var/mail/vhosts
-    chown -R dmarc:mail /var/mail/vhosts
+    mkdir -p /var/mail/vhosts && \
+    chown -R dmarc:mail /var/mail/vhosts && \
     usermod -aG mail dmarcdovecot-info.log" >> /etc/rsyslog.d/50-default.conf
 
 # Create log files and set permissions
