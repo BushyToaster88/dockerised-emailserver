@@ -47,19 +47,21 @@ imap.example.com
 mx.example.com
 
 This is an example MX record
-[MX](https://100mbupload.com/uploads/6649e232a8f3a_19-05-2024_09-27-35-PM_screenshot.png)
+![image](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/fbd29d38-f532-42f6-863d-c847f8114c2c)
 
 If you plan to send emails, you need to configure other records. **Note that for sending emails, a rDNS (Reverse DNS) record must also be configured.**
 If you do not want to send emails, you can ignore the below DNS settings.
 
 DMARC Record (TXT)
-[DMARC](https://100mbupload.com/uploads/6649e1e06a042_19-05-2024_09-26-10-PM_screenshot.png)
+![image](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/c4457d7b-be2b-4d94-ad4d-e10f298a13ff)
 
 SPF Record (TXT)
-[SPF](https://100mbupload.com/uploads/6649e19acf1f3_19-05-2024_09-22-18-PM_screenshot.png)]
+![image](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/8034a353-2ef5-42bd-8d6c-e3a85a5aecce)
 
 DKIM Record (TXT)
-[DKIM](https://100mbupload.com/uploads/6649e1c1925f0_19-05-2024_09-23-21-PM_screenshot.png)
+![image](https://github.com/BushyToaster88/dockerised-emailserver/assets/67993175/8dfd25d5-5fd6-4cdf-bccc-93f186f48dc9)
+
+
 
 
 
